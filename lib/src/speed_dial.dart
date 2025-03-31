@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:math';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:gradient_borders/gradient_borders.dart';
 
 import 'animated_child.dart';
 import 'global_key_extension.dart';
@@ -168,10 +169,14 @@ class SpeedDial extends StatefulWidget {
   /// Use mini fab for the speed dial
   final bool mini;
 
+  /// The border of the speed dial
+  final GradientBoxBorder? border;
+
   const SpeedDial({
     Key? key,
     this.children = const [],
     this.visible = true,
+    this.border,
     this.backgroundColor,
     this.foregroundColor,
     this.activeBackgroundColor,
@@ -400,6 +405,7 @@ class _SpeedDialState extends State<SpeedDial>
                               _controller.value < 0.4)
                           ? Container(
                               decoration: BoxDecoration(
+                                border: widget.border,
                                 shape: widget.gradientBoxShape,
                                 gradient: widget.gradient,
                               ),
@@ -420,6 +426,7 @@ class _SpeedDialState extends State<SpeedDial>
                               child: widget.activeChild ??
                                   Container(
                                     decoration: BoxDecoration(
+                                      border: widget.border,
                                       shape: widget.gradientBoxShape,
                                       gradient: widget.gradient,
                                     ),
@@ -491,18 +498,25 @@ class _SpeedDialState extends State<SpeedDial>
 
   @override
   Widget build(BuildContext context) {
-    return (kIsWeb || !Platform.isIOS) && widget.closeDialOnPop
-        ? WillPopScope(
-            child: _renderButton(),
-            onWillPop: () async {
-              if (_open) {
-                _toggleChildren();
-                return false;
-              }
-              return true;
-            },
-          )
-        : _renderButton();
+    return Theme(
+        data: Theme.of(context).copyWith(
+          highlightColor: Colors.transparent,
+          hoverColor: Colors.transparent,
+          splashColor: Colors.transparent,
+          splashFactory: NoSplash.splashFactory,
+        ),
+        child: (kIsWeb || !Platform.isIOS) && widget.closeDialOnPop
+            ? WillPopScope(
+                child: _renderButton(),
+                onWillPop: () async {
+                  if (_open) {
+                    _toggleChildren();
+                    return false;
+                  }
+                  return true;
+                },
+              )
+            : _renderButton());
   }
 }
 

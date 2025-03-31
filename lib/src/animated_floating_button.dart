@@ -78,6 +78,7 @@ class _AnimatedFloatingButtonState extends State<AnimatedFloatingButton>
                     : FloatingActionButton(
                         mini: widget.mini,
                         shape: widget.shape,
+                        splashColor: Colors.transparent,
                         backgroundColor: widget.backgroundColor,
                         foregroundColor: widget.foregroundColor,
                         onPressed: widget.callback,

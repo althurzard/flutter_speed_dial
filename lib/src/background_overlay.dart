@@ -55,10 +55,8 @@ class BackgroundOverlay extends AnimatedWidget {
                       child: Container(
                         width: dialKey.globalPaintBounds?.size.width,
                         height: dialKey.globalPaintBounds?.size.height,
-                        decoration: ShapeDecoration(
-                          shape: shape == const CircleBorder()
-                              ? const StadiumBorder()
-                              : shape,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
                           color: Colors.white,
                         ),
                       ),

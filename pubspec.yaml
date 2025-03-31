@@ -6,6 +6,7 @@ homepage: https://github.com/darioielardi/flutter_speed_dial/
 dependencies:
   flutter:
     sdk: flutter
+  gradient_borders: ^1.0.1
 
 dev_dependencies:
   flutter_lints:
