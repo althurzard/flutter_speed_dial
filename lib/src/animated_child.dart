@@ -127,6 +127,7 @@ class AnimatedChild extends AnimatedWidget {
           key: btnKey,
           heroTag: heroTag,
           onPressed: performAction,
+          clipBehavior: Clip.antiAlias,
           backgroundColor:
               backgroundColor ?? (dark ? Colors.grey[800] : Colors.grey[50]),
           foregroundColor:
